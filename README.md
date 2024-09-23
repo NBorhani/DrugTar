@@ -1,5 +1,6 @@
 # DrugTar-Protein Druggability Prediction
-![DrugTar wide](https://github.com/user-attachments/assets/72401ded-49bb-4dd5-b790-48657ddc726f)
+![DrugTar wide](https://github.com/user-attachments/assets/f56c9316-363d-4aa7-9117-0953d83fda1f)
+
 
 This repository contains the Python code and dataset for the paper titled **“DrugTar Improves Druggability Prediction by Integrating Large Language Models and Gene Ontologies”** by Niloofar Borhani, Iman Izadi, Ali Motahharynia, Mahsa Sheikholeslami, and Yousof Gheisari, currently under review.
 

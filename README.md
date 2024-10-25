@@ -1,4 +1,5 @@
 # DrugTar-Protein Druggability Prediction
+![DrugTar wide](https://github.com/user-attachments/assets/f56c9316-363d-4aa7-9117-0953d83fda1f)
 
 This repository contains the Python code and dataset for the paper titled **“DrugTar: A Deep Learning Framework Integrating ESM-2 Embeddings and GO Terms for Protein Druggability Prediction”** by Niloofar Borhani, Iman Izadi, Ali Motahharynia, Mahsa Sheikholeslami, and Yousof Gheisari, currently under review.
 

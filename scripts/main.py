@@ -1,6 +1,5 @@
 import numpy as np
 import argparse
-
 from model import train,test,prediction
 from DrugTar import DrugTar
 
@@ -37,18 +36,20 @@ args = parser.parse_args()
 # Training phase
 if args.phase == 'train':
     
-    # Initialize the DrugTar model
-    model = DrugTar(input_dim=args.feat_selected, 
-                    hidden_dim=list(map(int, args.DNN_dims.split("_"))), 
-                    dropout_rate=args.dropout)
-
     # Training and evaluating DrugTar model with k-fold cross validation
-    train(model, train_feature=args.train_feature, train_label=args.train_label, 
-          test_feature=args.test_feature, test_label=args.test_label,
-          save_model = args.save_model, model_file=args.model_file,
-          feat_selected=args.feat_selected, k_fold=args.k_fold, 
-          init_lr=args.init_lr, num_epochs=args.num_epochs,
-          batch_size=args.batch_size)
+    train(train_feature=args.train_feature, 
+          train_label=args.train_label, 
+          test_feature=args.test_feature, 
+          test_label=args.test_label,
+          save_model = args.save_model, 
+          model_file=args.model_file,
+          feat_selected=args.feat_selected, 
+          hidden_dim=list(map(int, args.DNN_dims.split("_"))),
+          k_fold=args.k_fold, 
+          init_lr=args.init_lr, 
+          num_epochs=args.num_epochs,
+          batch_size=args.batch_size, 
+          dropout_rate=args.dropout)
     
     
 # Independent test phase

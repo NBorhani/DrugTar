@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from metrics import evaluate
+from DrugTar import DrugTar
 
 import keras
 from keras.optimizers import Adam
@@ -16,21 +17,14 @@ from sklearn.feature_selection import SelectKBest,f_regression
 # Get the current directory of the script
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-def train(model, train_feature, train_label, test_feature, test_label,
+def train(train_feature, train_label, test_feature, test_label,
           save_model = False, model_file='model/',
-          feat_selected=4000, k_fold=10, init_lr=0.0002, num_epochs=110,
-          batch_size=64):
-  
-    # Build the model
-    model.build_model()
-    print("Initialize DrugTar successfully")
-    model = model.get_model()
-    model.summary()
-    
+          feat_selected=4000, hidden_dim=[128, 64, 32], k_fold=10, init_lr=0.0002, num_epochs=110,
+          batch_size=64, dropout_rate=0.5):
+      
     
     # Data loading
     print("Loading ProTar-II...")
-    
     features = pd.read_pickle(os.path.join(current_dir,'..', train_feature))
     features.head()    
     print("Shape of features DataFrame:", features.shape)
@@ -100,6 +94,18 @@ def train(model, train_feature, train_label, test_feature, test_label,
         # Define EarlyStopping callback
         early_stopping = EarlyStopping(monitor='val_auc', patience=5, restore_best_weights=True)
     
+        # Initialize the DrugTar model
+        model = DrugTar(input_dim=feat_selected, 
+                        hidden_dim=hidden_dim, 
+                        dropout_rate=dropout_rate)
+
+        # Build the model
+        
+        model.build_model()
+        print("Initialize DrugTar successfully")
+        model = model.get_model()
+        model.summary()
+    
         # Compile the model
         model.compile(optimizer=optimizer,
                       loss='binary_crossentropy',
@@ -109,15 +115,7 @@ def train(model, train_feature, train_label, test_feature, test_label,
         history = model.fit(X_train_selected, y_train_fold, epochs=num_epochs, batch_size=batch_size,
                             validation_data=(X_val_selected, y_val_fold), callbacks=[early_stopping, lr_scheduler])
          
-        # Plot training and testing loss functions
-        plt.plot(history.history['loss'], label='Train Loss')
-        plt.plot(history.history['val_loss'], label='Test Loss')
-        plt.title('Model Loss')
-        plt.xlabel('Epoch')
-        plt.ylabel('Loss')
-        plt.legend()
-        plt.show()
-    
+        # Plot training and testing loss functions  
         plt.figure(figsize=(6,6))
         plt.subplot(2, 1, 1)
         plt.plot(history.history['loss'], label='Train Loss')
@@ -129,7 +127,7 @@ def train(model, train_feature, train_label, test_feature, test_label,
         plt.plot(history.history['auc'], label='Train auc')
         plt.plot(history.history['val_auc'], label='Test auc')
         plt.ylim([0, 1])
-        plt.title('auc')
+        plt.title('AUC')
         
         plt.show()
     
@@ -164,7 +162,7 @@ def train(model, train_feature, train_label, test_feature, test_label,
         print("--- valid NPV score:                %.4f" % NPV)
         print("--- valid F1 score:                 %.4f" % F1)
         
-        break
+
         
     # Print metrics
     print("\nNow 10 fold cross validation metrics is calculating ....")

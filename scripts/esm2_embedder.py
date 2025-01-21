@@ -28,7 +28,7 @@ def protein_embedding(path):
     all_seq = read_fasta(path)
     esm2_embed = {}
     
-    for pr_seq in all_seq[0:5]:
+    for pr_seq in all_seq:
         esm2b_data = [
         pr_seq,
         ]      

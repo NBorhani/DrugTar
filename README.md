@@ -3,6 +3,7 @@
 
 
 This repository contains the Python code and dataset for the paper titled **“DrugTar improves druggability prediction by integrating large language models and gene ontologies”** by Niloofar Borhani, Iman Izadi, Ali Motahharynia, Mahsa Sheikholeslami, and Yousof Gheisari, currently under review.
+The paper is available at [https://doi.org/10.1093/bioinformatics/btaf360](https://doi.org/10.1093/bioinformatics/btaf360).
 
 ## Feature Generation
 - **`esm2_embedder.py`**: Generates ESM-2 embeddings for each protein sequence.

@@ -2,7 +2,7 @@
 ![DrugTar wide](https://github.com/user-attachments/assets/919309a3-2664-408a-9c95-10c1ce74b650)
 
 
-This repository contains the Python code and dataset for the paper titled **“DrugTar improves druggability prediction by integrating large language models and gene ontologies”** by Niloofar Borhani, Iman Izadi, Ali Motahharynia, Mahsa Sheikholeslami, and Yousof Gheisari, currently under review.
+This repository contains the Python code and dataset for the paper titled **“DrugTar improves druggability prediction by integrating large language models and gene ontologies”** by Niloofar Borhani, Iman Izadi, Ali Motahharynia, Mahsa Sheikholeslami, and Yousof Gheisari.
 The paper is available at [https://doi.org/10.1093/bioinformatics/btaf360](https://doi.org/10.1093/bioinformatics/btaf360).
 
 ## Feature Generation
